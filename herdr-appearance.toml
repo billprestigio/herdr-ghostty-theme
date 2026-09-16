@@ -1,0 +1,46 @@
+# Appearance fragment: merge tables and keys; do not replace the entire config.
+[theme]
+name = "catppuccin"
+
+auto_switch = false
+[theme.custom]
+accent = "#cba6f7"
+blue = "#cba6f7"
+mauve = "#cba6f7"
+panel_bg = "#11121b"
+sidebar_bg = "#181725"
+active_row_bg = "#1e1e2d"
+selection_bg = "#313244"
+surface0 = "#1e1e2d"
+surface1 = "#323244"
+text = "#eae8ee"
+subtext0 = "#c8c5cf"
+overlay0 = "#aaa7b2"
+overlay1 = "#c8c5cf"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+red = "#f38ba8"
+teal = "#94e2d5"
+
+[ui]
+pane_borders = "always"
+pane_outer_borders = true
+sidebar_width = 30
+sidebar_max_width = 60
+agent_panel_sort = "spaces"
+
+show_agent_labels_on_pane_borders = true
+status_indicators = "symbols"
+[ui.sidebar.agents]
+row_gap = 0
+rows = [
+  ["state_icon", "workspace", { token = "tab", fg = "#aaa7b2", dim = false }],
+  [{ token = "state_text", dim = false }, { token = "agent", dim = false }],
+]
+
+[ui.sidebar.spaces]
+row_gap = 1
+rows = [
+  ["state_icon", "workspace"],
+  [{ token = "branch", dim = false }, { token = "git_status", dim = false }],
+]

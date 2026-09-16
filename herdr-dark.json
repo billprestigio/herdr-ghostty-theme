@@ -1,0 +1,16 @@
+{
+  "name": "Herdr Dark",
+  "base": "dark",
+  "overrides": {
+    "claude": "#d97757",
+    "text": "#eae8ee",
+    "inverseText": "#11121b",
+    "inactive": "#aaa7b2",
+    "subtle": "#323244",
+    "suggestion": "#cba6f7",
+    "permission": "#cba6f7",
+    "success": "#a6e3a1",
+    "error": "#f38ba8",
+    "warning": "#f9e2af"
+  }
+}
