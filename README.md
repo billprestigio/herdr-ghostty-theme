@@ -15,7 +15,11 @@ cd herdr-ghostty-theme
 
 ## 最省事的迁移方式
 
-在新设备安装好 Ghostty、herdr 和 Claude Code 后，把这个仓库交给 Codex，并粘贴 [CODEX_PROMPT.zh-CN.md](CODEX_PROMPT.zh-CN.md) 的内容。Codex 会先备份，再把外观片段合并到本机现有配置中。
+把这个仓库交给任何能够操作文件和终端的 AI Agent，并发送下面这段提示词：
+
+```text
+请把这个仓库中的 Ghostty、herdr 和 Claude Code 外观配置迁移到当前设备。先识别操作系统、软件版本和实际配置路径，再分别备份原文件并合并配置片段，不要整份覆盖，也不要改动快捷键、通知、账号、权限、模型、会话或工作区。检查 JetBrains Mono 和 Sarasa Mono SC 是否存在；Windows 没有 Ghostty 桌面版时跳过 Ghostty，只安装 herdr 和 Claude Code 部分。完成后运行可用的配置检查，确认正文颜色为 #eae8ee、herdr 的 sidebar_max_width 为 60、Agent row_gap 为 0，并告诉我重新加载方法及无法验证的项目。
+```
 
 这些文件是配置片段，不能直接覆盖目标设备的完整配置，否则可能丢失原有快捷键、通知和其他个人设置。
 
@@ -24,7 +28,6 @@ cd herdr-ghostty-theme
 - `ghostty-appearance.conf`：Ghostty 的字体、颜色、窗口和光标外观。
 - `herdr-appearance.toml`：herdr 的主题、边框与侧栏设置。
 - `herdr-dark.json`：Claude Code 自定义主题，显示名为 `Herdr Dark`。
-- `CODEX_PROMPT.zh-CN.md`：给新设备 Codex 的完整迁移提示词。
 - `SHA256SUMS.txt`：配置文件完整性校验值。
 
 ## 样式参数
@@ -40,24 +43,28 @@ cd herdr-ghostty-theme
 
 ## 手动安装位置
 
-Ghostty 的片段应合并到本机 Ghostty 配置：
+### macOS
 
-- macOS：`~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
-- Linux：`~/.config/ghostty/config`
+- Ghostty：`~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
+- herdr：`~/.config/herdr/config.toml`
+- Claude Code 主题：`~/.claude/themes/herdr-dark.json`
+- Claude Code 设置：`~/.claude/settings.json`
 
-herdr 的片段应合并到：
+### Linux
 
-```text
-~/.config/herdr/config.toml
-```
+- Ghostty：`$XDG_CONFIG_HOME/ghostty/config.ghostty`；未设置 `XDG_CONFIG_HOME` 时使用 `~/.config/ghostty/config.ghostty`
+- herdr：`~/.config/herdr/config.toml`
+- Claude Code 主题：`~/.claude/themes/herdr-dark.json`
+- Claude Code 设置：`~/.claude/settings.json`
 
-Claude Code 主题文件放到：
+### Windows
 
-```text
-~/.claude/themes/herdr-dark.json
-```
+- Ghostty：官方桌面版目前尚未支持 Windows，跳过 `ghostty-appearance.conf`
+- herdr：`%APPDATA%\herdr\config.toml`
+- Claude Code 主题：`%USERPROFILE%\.claude\themes\herdr-dark.json`
+- Claude Code 设置：`%USERPROFILE%\.claude\settings.json`
 
-然后只把 `~/.claude/settings.json` 中的 `theme` 字段设为：
+把 `herdr-appearance.toml` 合并进 herdr 配置，把 `herdr-dark.json` 复制到 Claude Code 主题位置。然后只把 Claude Code 设置中的 `theme` 字段设为：
 
 ```json
 "theme": "custom:herdr-dark"
@@ -66,7 +73,15 @@ Claude Code 主题文件放到：
 ## 重新加载
 
 - macOS Ghostty：按 `Cmd + Shift + ,`
+- Linux Ghostty：按 `Ctrl + Shift + ,`
 - herdr：先按 `Ctrl + B`，松开后按 `Shift + R`
 - Claude Code：输入 `/theme`，选择 `Herdr Dark`
 
 配置不包含账号、密钥、会话历史、工作区数据或状态栏脚本。安装前仍应备份目标设备的现有配置。
+
+## 官方文档
+
+- [Ghostty 配置路径](https://ghostty.org/docs/config)
+- [Ghostty 平台支持](https://ghostty.org/docs/features)
+- [herdr 配置路径](https://herdr.dev/docs/configuration/)
+- [Claude Code 自定义主题](https://code.claude.com/docs/en/terminal-config)
